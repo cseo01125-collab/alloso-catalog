@@ -215,7 +215,7 @@ function render(){
   renderOut(row);
 }
 function renderColors(wrap,row,n){
-  const cols=DATA.colors[row.ar]||[];
+  const cols=DATA.cpool[row.cl]||DATA.colors[row.ar]||[];
   if(!cols.length) return;
   if(color===null) color=cols[0];
   const sec=document.createElement('section'); sec.className='step';

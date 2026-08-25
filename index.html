@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>알로소 제품 가격 카탈로그</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#16181C; --ink-2:#2A2E36; --line:#DEDAD2; --line-2:#EFEDE8;
+  --paper:#F7F5F1; --card:#FFFFFF; --dim:#7B7669; --brass:#8A6A2F; --live:#1F5C4A;
+  --r:3px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:15px; line-height:1.5; letter-spacing:-.01em;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.mono{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;letter-spacing:.02em}
+
+/* header */
+header{
+  position:sticky;top:0;z-index:40;background:var(--ink);color:#EDEAE3;
+  padding:14px 18px calc(14px + env(safe-area-inset-top)) 18px;
+  padding-top:calc(14px + env(safe-area-inset-top));
+  display:flex;align-items:center;gap:14px;
+}
+.brand{font-size:13px;font-weight:700;letter-spacing:.34em;text-transform:uppercase}
+.brand span{opacity:.45;letter-spacing:.12em;font-weight:500;text-transform:none;margin-left:10px;font-size:11px}
+.disc{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:#B9B3A5}
+.disc input{
+  width:52px;padding:5px 7px;text-align:right;border:1px solid #3A3E47;border-radius:var(--r);
+  background:#22252B;color:#EDEAE3;font:inherit;font-variant-numeric:tabular-nums
+}
+main{max-width:940px;margin:0 auto;padding:0 14px 120px}
+
+/* step */
+.step{border-bottom:1px solid var(--line-2);padding:16px 0}
+.step:last-of-type{border-bottom:0}
+.shead{display:flex;align-items:baseline;gap:9px;margin-bottom:10px}
+.sidx{
+  font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.16em;
+  border:1px solid var(--line);border-radius:99px;padding:2px 8px;flex:none
+}
+.slabel{font-size:13px;font-weight:700;letter-spacing:-.02em}
+.spick{font-size:12px;color:var(--dim);margin-left:auto;text-align:right}
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+button.opt{
+  font:inherit;font-size:14px;color:var(--ink);background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:10px 14px;cursor:pointer;transition:border-color .12s,background .12s;
+  min-height:42px
+}
+button.opt:hover{border-color:var(--ink-2)}
+button.opt[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+button.opt:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.price-hint{font-size:11px;color:var(--dim);margin-left:7px}
+button.opt[aria-pressed="true"] .price-hint{color:#A9A296}
+
+/* swatches */
+.sw{display:flex;flex-wrap:wrap;gap:10px}
+button.chip{
+  border:1px solid var(--line);background:var(--card);border-radius:var(--r);
+  padding:6px 11px 6px 6px;display:flex;align-items:center;gap:9px;cursor:pointer;
+  font:inherit;font-size:13px;color:var(--ink);min-height:44px
+}
+button.chip:hover{border-color:var(--ink-2)}
+button.chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+button.chip:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.chip i{
+  width:30px;height:30px;border-radius:2px;display:block;flex:none;
+  background:#E6E2DA center/cover no-repeat;border:1px solid rgba(0,0,0,.09)
+}
+
+/* result */
+.result{
+  margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden
+}
+.rtop{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.shot{
+  background:#F2EFE9 center/contain no-repeat;aspect-ratio:4/3;min-height:190px;
+  border-right:1px solid var(--line-2)
+}
+.rbody{padding:18px 18px 16px}
+.rname{font-size:19px;font-weight:800;letter-spacing:-.035em;line-height:1.25}
+.rsub{font-size:12.5px;color:var(--dim);margin-top:5px}
+.codes{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 0}
+.code{
+  border:1px solid var(--line);border-radius:var(--r);padding:5px 9px;
+  font-size:13px;background:#FBFAF7
+}
+.code b{font-weight:700}
+.code em{font-style:normal;color:var(--dim);font-size:11px;margin-right:6px;letter-spacing:.06em}
+.spec{margin-top:12px;font-size:13px;color:var(--ink-2)}
+.spec em{font-style:normal;color:var(--dim);font-size:11px;letter-spacing:.1em;margin-right:8px}
+.rprice{border-top:1px solid var(--line-2);padding:14px 18px 16px;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.pblock .plab{font-size:10.5px;letter-spacing:.16em;color:var(--dim);font-weight:700}
+.pblock .pval{font-size:17px;font-weight:600;margin-top:3px}
+.pblock.list .pval{color:var(--dim);text-decoration:line-through;text-decoration-thickness:1px}
+.pblock.promo .pval{font-size:29px;font-weight:800;letter-spacing:-.04em;color:var(--live)}
+.pblock.promo .plab{color:var(--live)}
+.save{margin-left:auto;font-size:12px;color:var(--brass);font-weight:600;padding-bottom:4px}
+
+.empty{color:var(--dim);font-size:14px;padding:34px 4px;text-align:center;border:1px dashed var(--line);border-radius:var(--r);margin-top:22px}
+.reset{
+  margin:18px 0 0;font:inherit;font-size:13px;background:none;border:0;color:var(--dim);
+  cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:8px 0
+}
+.reset:hover{color:var(--ink)}
+@media (max-width:640px){
+  .rtop{grid-template-columns:1fr}
+  .shot{border-right:0;border-bottom:1px solid var(--line-2);aspect-ratio:16/10}
+  .pblock.promo .pval{font-size:26px}
+  header{gap:8px}
+  .brand span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">ALLOSO<span>제품 가격 카탈로그</span></div>
+  <label class="disc">할인율
+    <input id="disc" class="num" type="number" min="0" max="90" step="1" value="30">%
+  </label>
+</header>
+<main>
+  <div id="steps"></div>
+  <div id="out"></div>
+  <button class="reset" id="reset" hidden>처음부터 다시 고르기</button>
+</main>
+<script>
+const STEPS=[
+  {k:'se',label:'시리즈'},{k:'ty',label:'타입'},{k:'sa',label:'사양'},{k:'di',label:'방향'},
+  {k:'gr',label:'등급'},{k:'ma',label:'소재'},{k:'ar',label:'아티클'}
+];
+let DATA=null, pick={}, color=null;
+
+const won=n=>n.toLocaleString('ko-KR');
+const promo=n=>{const d=Math.min(90,Math.max(0,+document.getElementById('disc').value||0));
+  return Math.round(n*(1-d/100)/1000)*1000;};
+
+function filter(upto){
+  return DATA.rows.filter(r=>STEPS.slice(0,upto).every(s=>pick[s.k]===undefined||r[s.k]===pick[s.k]));
+}
+function opts(i){
+  const k=STEPS[i].k, rows=filter(i), seen=[];
+  for(const r of rows) if(!seen.includes(r[k])) seen.push(r[k]);
+  const o=DATA.order;
+  if(k==='gr') seen.sort((a,b)=>o.grade.indexOf(a)-o.grade.indexOf(b));
+  if(k==='ma') seen.sort((a,b)=>o.mat.indexOf(a)-o.mat.indexOf(b));
+  return seen.filter(v=>v!=='');
+}
+function matched(){
+  const rows=filter(STEPS.length);
+  return rows.length===1?rows[0]:null;
+}
+function artPrices(){
+  const m={};
+  for(const r of filter(6)) if(m[r.ar]===undefined||r.pr<m[r.ar]) m[r.ar]=r.pr;
+  return m;
+}
+function render(){
+  const wrap=document.getElementById('steps'); wrap.innerHTML='';
+  let stop=false, n=0;
+  STEPS.forEach((s,i)=>{
+    if(stop) return;
+    const list=opts(i);
+    if(!list.length){                       // 이 단계는 값이 없으므로 건너뜀
+      if(pick[s.k]!==undefined) delete pick[s.k];
+      return;
+    }
+    n++;
+    const prices=s.k==='ar'?artPrices():null;
+    const sec=document.createElement('section'); sec.className='step';
+    const head=document.createElement('div'); head.className='shead';
+    head.innerHTML=`<span class="sidx num">${String(n).padStart(2,'0')}</span>
+                    <span class="slabel">${s.label}</span>`;
+    if(pick[s.k]!==undefined){
+      const p=document.createElement('span'); p.className='spick'; p.textContent=pick[s.k];
+      head.appendChild(p);
+    }
+    sec.appendChild(head);
+    const box=document.createElement('div'); box.className='opts';
+    list.forEach(v=>{
+      const b=document.createElement('button');
+      b.className='opt'; b.type='button';
+      b.setAttribute('aria-pressed', pick[s.k]===v);
+      b.textContent=v;
+      if(prices&&prices[v]!==undefined){
+        const t=document.createElement('span'); t.className='price-hint num';
+        t.textContent=won(promo(prices[v])); b.appendChild(t);
+      }
+      b.onclick=()=>{
+        if(pick[s.k]===v) delete pick[s.k];
+        else pick[s.k]=v;
+        STEPS.slice(i+1).forEach(x=>delete pick[x.k]);
+        color=null; render();
+      };
+      box.appendChild(b);
+    });
+    sec.appendChild(box); wrap.appendChild(sec);
+    if(pick[s.k]===undefined) stop=true;
+  });
+
+  const row=matched();
+  if(row) renderColors(wrap, row, n+1);
+  document.getElementById('reset').hidden=!Object.keys(pick).length;
+  renderOut(row);
+}
+function renderColors(wrap,row,n){
+  const cols=DATA.colors[row.ar]||[];
+  if(!cols.length) return;
+  if(color===null) color=cols[0];
+  const sec=document.createElement('section'); sec.className='step';
+  sec.innerHTML=`<div class="shead"><span class="sidx num">${String(n).padStart(2,'0')}</span>
+                 <span class="slabel">컬러</span><span class="spick">${color}</span></div>`;
+  const box=document.createElement('div'); box.className='sw';
+  cols.forEach(c=>{
+    const b=document.createElement('button'); b.className='chip'; b.type='button';
+    b.setAttribute('aria-pressed', color===c);
+    const sw=(DATA.img.s[row.ar]||{})[c];
+    b.innerHTML=`<i${sw?` style="background-image:url('img/s/${sw}')"`:''}></i><span>${c}</span>`;
+    b.onclick=()=>{color=c; render();};
+    box.appendChild(b);
+  });
+  sec.appendChild(box); wrap.appendChild(sec);
+}
+function renderOut(row){
+  const out=document.getElementById('out');
+  if(!row){
+    out.innerHTML='<div class="empty">위에서 항목을 차례대로 선택하면 제품코드와 가격이 표시됩니다.</div>';
+    return;
+  }
+  const imgs=DATA.img.p[row.c1]||{};
+  const src=imgs[color]||Object.values(imgs)[0]||null;
+  const p=promo(row.pr), save=row.pr-p;
+  const spec=row.sp?row.sp.split('X'):null;
+  out.innerHTML=`
+  <div class="result">
+    <div class="rtop">
+      <div class="shot"${src?` style="background-image:url('img/p/${src}')"`:''}></div>
+      <div class="rbody">
+        <div class="rname">${row.sn}</div>
+        <div class="rsub">${[row.gr,row.ma,row.ar,color].filter(Boolean).join(' · ')}</div>
+        <div class="codes">
+          <span class="code mono"><em>${row.c2?'세트코드 1':'제품코드'}</em><b>${row.c1}</b></span>
+          ${row.c2?`<span class="code mono"><em>세트코드 2</em><b>${row.c2}</b></span>`:''}
+          ${row.cp?`<span class="code"><em>구성</em><b>${row.cp}</b></span>`:''}
+        </div>
+        ${spec?`<div class="spec num"><em>W × D × H</em>${spec[0]} × ${spec[1]} × ${spec[2]} mm</div>`:''}
+      </div>
+    </div>
+    <div class="rprice">
+      <div class="pblock list"><div class="plab">소비자가</div><div class="pval num">${won(row.pr)}</div></div>
+      <div class="pblock promo"><div class="plab">프로모션가</div><div class="pval num">${won(p)}</div></div>
+      ${save>0?`<div class="save num">${won(save)}원 할인</div>`:''}
+    </div>
+  </div>`;
+}
+document.getElementById('disc').addEventListener('input',render);
+document.getElementById('reset').onclick=()=>{pick={};color=null;render();};
+fetch('data.json').then(r=>r.json()).then(d=>{DATA=d;render();})
+  .catch(()=>{document.getElementById('out').innerHTML=
+    '<div class="empty">data.json을 불러오지 못했습니다. index.html과 같은 폴더에 있는지 확인해 주세요.</div>';});
+</script>
+</body>
+</html>

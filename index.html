@@ -32,6 +32,7 @@ header{
 }
 .brand{font-size:13px;font-weight:700;letter-spacing:.34em;text-transform:uppercase}
 .brand span{opacity:.45;letter-spacing:.12em;font-weight:500;text-transform:none;margin-left:10px;font-size:11px}
+.built{font-size:11px;color:#7E7869;letter-spacing:.02em;white-space:nowrap}
 .disc{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:#B9B3A5}
 .disc input{
   width:52px;padding:5px 7px;text-align:right;border:1px solid #3A3E47;border-radius:var(--r);
@@ -119,6 +120,7 @@ button.chip:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
   .pblock.promo .pval{font-size:26px}
   header{gap:8px}
   .brand span{display:none}
+  .built{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -126,6 +128,7 @@ button.chip:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 <body>
 <header>
   <div class="brand">ALLOSO<span>제품 가격 카탈로그</span></div>
+  <span id="built" class="built"></span>
   <label class="disc">할인율
     <input id="disc" class="num" type="number" min="0" max="90" step="1" value="30">%
   </label>
@@ -266,7 +269,10 @@ function renderOut(row){
 }
 document.getElementById('disc').addEventListener('input',render);
 document.getElementById('reset').onclick=()=>{pick={};color=null;render();};
-fetch('data.json').then(r=>r.json()).then(d=>{DATA=d;render();})
+fetch('data.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{
+  DATA=d;
+  if(d.built){const b=document.getElementById('built');b.textContent='데이터 '+d.built;}
+  render();})
   .catch(()=>{document.getElementById('out').innerHTML=
     '<div class="empty">data.json을 불러오지 못했습니다. index.html과 같은 폴더에 있는지 확인해 주세요.</div>';});
 </script>

@@ -144,7 +144,7 @@ let DATA=null, pick={}, color=null;
 
 const won=n=>n.toLocaleString('ko-KR');
 const promo=n=>{const d=Math.min(90,Math.max(0,+document.getElementById('disc').value||0));
-  return Math.round(n*(1-d/100)/1000)*1000;};
+  return Math.round(n*(1-d/100));};
 
 function filter(upto){
   return DATA.rows.filter(r=>STEPS.slice(0,upto).every(s=>pick[s.k]===undefined||r[s.k]===pick[s.k]));
